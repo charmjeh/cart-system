@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  padding:  1em 9.6rem;
+  padding:  1em 9.3rem;
 
   @media (max-width: 600px) {
     & {
@@ -26,14 +26,14 @@ const Container = styled.div`
 `;
 
 const App = () => {
-  const [cart, setCart] = useState([])
-  const value = useMemo(() => ({ cart, setCart }), [cart, setCart])
+  const [cartList, setCartList] = useState([])
+  const value = useMemo(() => ({ cartList, setCartList }), [cartList, setCartList])
 
   return (
     <Container>
       <GlobalStyle />
-      <Header />
       <CartContext.Provider value={value}>
+        <Header />
         <Route path="/" exact={true} component={Products} />
         <Route path="/cart" component={Cart} />
       </CartContext.Provider>

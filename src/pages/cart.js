@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { CartContext } from '../CartContext';
-import cartItem from '../components/cartItem';
+import CartItem from '../components/cartItem';
 
 const Container = styled.div`
   h1 {
@@ -15,13 +15,12 @@ const Container = styled.div`
 `;
 
 const Cart = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const { cartList, setCartList } = useContext(CartContext);
 
   return (
     <Container>
       <h1>CART</h1>
-      {/* <div>{JSON.stringify(cart)}</div> */}
-      <cartItem />
+      {JSON.stringify(cartList)}
     </Container>
   );
 };

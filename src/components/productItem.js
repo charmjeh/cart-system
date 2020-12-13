@@ -45,15 +45,26 @@ const AddCart = styled.button`
 `;
 
 function ProductItem({ product }) {
-    const {cart, setCart} = useContext(CartContext);
+    const {cartList, setCartList} = useContext(CartContext);
     const addItemToCart = () => {
-      setCart([...cart, product.id])
+      const cartListClone = [...cartList]
+      const idx = cartListClone.findIndex(cartItem => cartItem.product.id === product.id)
+      if (idx > -1) {
+        cartListClone[idx].quantity += 1
+        setCartList(cartListClone)
+      }
+      else {
+        setCartList(cartListClone.concat({
+          quantity: 1,
+          product
+        }))
+      }
     };
     return (
       <Card>
         <CoverImage src={product.coverImage} alt={product.title}/>
         <ClassName>
-          <h1 class="title clamp">{product.title}</h1>
+          <h1 className="title clamp">{product.title}</h1>
           {/* <button><FontAwesomeIcon icon={faCaretDown}/></button> */}
         </ClassName>
         <div>

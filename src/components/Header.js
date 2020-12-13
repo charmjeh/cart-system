@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { CartContext } from "../CartContext";
 
   const HeaderBlock = styled.header`
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap');
@@ -36,7 +37,9 @@ import styled from 'styled-components';
 `;
 
 function Header() {
-  return (
+    const { cartList } = useContext(CartContext)
+
+    return (
     <HeaderBlock>
         <h1>NEW CLASSES</h1>
         <ul>
@@ -44,7 +47,10 @@ function Header() {
                 <Link to="/">PRODUCT LIST</Link>
             </li>
             <li>
-                <Link to="/cart">CART</Link>
+                <Link to="/cart">
+                    CART 
+                    ({cartList.reduce((prev, before) => prev + before.quantity, 0)})
+                </Link>
             </li>
         </ul>
     </HeaderBlock>

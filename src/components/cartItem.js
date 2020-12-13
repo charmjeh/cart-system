@@ -9,10 +9,10 @@ const Card = styled.div`
   background-color: #efefef;
 `
 
-function cartItem(props) {
+function cartItem({ item }) {
     return (
       <Card>
-        <p>카드 내용입니다.</p>
+        <p>{item}</p>
       </Card>
     );
   }
