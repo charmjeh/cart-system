@@ -5,6 +5,7 @@ import { CartContext } from './CartContext';
 import Header from './components/Header';
 import Products from './pages/products';
 import Cart from './pages/cart';
+import { useEffect } from 'react';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
@@ -24,10 +25,14 @@ const Container = styled.div`
     }
   }
 `;
-
+const cartListFromLocalStarage = JSON.parse(localStorage.getItem('cartList') || '[]')
 const App = () => {
-  const [cartList, setCartList] = useState([])
+  const [cartList, setCartList] = useState(cartListFromLocalStarage)
   const value = useMemo(() => ({ cartList, setCartList }), [cartList, setCartList])
+
+  useEffect(() => {
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+  }, [cartList]);
 
   return (
     <Container>

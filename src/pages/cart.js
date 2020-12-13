@@ -1,27 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { CartContext } from '../CartContext';
 import CartItem from '../components/cartItem';
+import { coupons } from '../coupons.js';
 
-const Container = styled.div`
-  h1 {
-    font-size: 1.5rem;
+const CartContainer = styled.div`
+  & {
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
   }
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: stretch;
 `;
 
 const Cart = () => {
-  const { cartList, setCartList } = useContext(CartContext);
-
+  const {cartList} = useContext(CartContext);
+  console.log(coupons) 
   return (
-    <Container>
+    <CartContainer>
       <h1>CART</h1>
-      {JSON.stringify(cartList)}
-    </Container>
+      <h3><strong>상품 목록</strong></h3>
+      <hr/>
+      <div>
+        {cartList.map((cartItem, idx) => <CartItem key={idx} cartItem={cartItem} />)}
+      </div>
+      <h3><strong>총 가격</strong></h3>
+      <hr/>
+      {cartList.reduce((prev, next)=>{
+        return prev + (next.quantity * next.product.price);
+      }, 0)}원
+    </CartContainer>
   );
 };
 
