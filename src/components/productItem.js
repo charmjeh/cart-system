@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { CartContext } from '../CartContext';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const Card = styled.div`
   width: 278px;
@@ -28,7 +26,7 @@ const ClassName = styled.div`
     &.clamp {
       font-size: 1rem;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       overflow: hidden;
     }
   }
@@ -55,6 +53,7 @@ function ProductItem({ product }) {
       }
       else {
         setCartList(cartListClone.concat({
+          checked: true,
           quantity: 1,
           product
         }))
@@ -64,8 +63,7 @@ function ProductItem({ product }) {
       <Card>
         <CoverImage src={product.coverImage} alt={product.title}/>
         <ClassName>
-          <h1 className="title clamp">{product.title}</h1>
-          {/* <button><FontAwesomeIcon icon={faCaretDown}/></button> */}
+          <h1 className="title">{product.title}</h1>
         </ClassName>
         <div>
           월&nbsp;
@@ -73,7 +71,9 @@ function ProductItem({ product }) {
             {product.price.toLocaleString()}
           </strong>
         </div>
-        <AddCart onClick={addItemToCart}>장바구니에 담기</AddCart>
+        <AddCart
+          onClick={addItemToCart}
+        >장바구니에 담기</AddCart>
       </Card>
     );
   }

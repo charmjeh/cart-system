@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { CartContext } from "../CartContext";
 
   const HeaderBlock = styled.header`
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap');
     display: flex;
     justify-content: space-between;
     align-items: center;
