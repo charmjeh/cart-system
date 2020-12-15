@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { CartContext } from '../CartContext';
 import CartItem from '../components/cartItem';
-import CouponItem from '../components/couponItem';
+// import CouponItem from '../components/couponItem';
 import { coupons } from '../coupons.js';
 
 const CartContainer = styled.div`
@@ -29,8 +29,7 @@ const CartContainer = styled.div`
 
 const Cart = () => {
   const {cartList, setCartList} = useContext(CartContext);
-  const {couponList} =
-    useState(coupons.map(coupon => coupon.checked = false));
+  const [selectedCouponIdx, setSelectedCouponIdx] = useState(1);
 
   const handleCheckProduct = (e) => {
     const cartListClone = [...cartList]
@@ -43,14 +42,21 @@ const Cart = () => {
     setCartList(cartList.filter(cartItem => cartItem.product.id !== id));
   }
 
-  const handleCheckCoupon = (e) => {
-    // TODO: Add Coupon
-  }
+  // TODO: 쿠폰 적용
+  // const handleCheckCoupon = (e) => {
+  //   setSelectedCouponIdx(e.target.value);
+  // }
 
   const ProductSum = () => cartList.reduce((prev, next)=>{
     const acc = next.checked ? (next.quantity * next.product.price) : 0
     return prev + acc;
   }, 0)
+
+  // TODO: 쿠폰 적용
+  // const SumByDiscountAmount = () => {
+  //   const selectedCoupon = coupons[selectedCouponIdx];
+  //   return ProductSum() - selectedCoupon.discountAmount
+  // }
 
   return (
     <CartContainer>
@@ -69,6 +75,8 @@ const Cart = () => {
           })
         }
       </div>
+      {/* 
+      TODO: 쿠폰 사용
       <h3><strong>쿠폰 사용</strong></h3>
       <hr/>
         {
@@ -81,9 +89,10 @@ const Cart = () => {
             />
           })
         }
+        */}
       <h3><strong>총 가격</strong></h3>
       <hr/>
-      상품 가격 <ProductSum />원 - 쿠폰 적용가 0원 = 0원
+      <strong><ProductSum />원</strong>
     </CartContainer>
   );
 };

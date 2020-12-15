@@ -19,13 +19,13 @@ const CardContainer = styled.div`
 function CouponItem({ coupon, handleCheckCoupon, index }) {
     return (
       <CardContainer>
-          <input
-            type="radio"
-            name="selectCoupon"
-            value={index}
-            onClick={handleCheckCoupon}
-          />
-          <h2>{coupon.title}</h2>
+        <input
+          type="radio"
+          name="selectCoupon"
+          value={index}
+          onClick={handleCheckCoupon}
+        />
+        <h2>{coupon.title}</h2>
       </CardContainer>
     );
   }
